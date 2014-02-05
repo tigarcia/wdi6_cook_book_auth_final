@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140131175830) do
+ActiveRecord::Schema.define(version: 20140204190331) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "books", force: true do |t|
     t.string   "title"
@@ -37,6 +40,13 @@ ActiveRecord::Schema.define(version: 20140131175830) do
     t.integer "recipe_id"
   end
 
+  create_table "locations", force: true do |t|
+    t.float    "lat"
+    t.float    "long"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "recipes", force: true do |t|
     t.string   "name"
     t.string   "course"
@@ -49,6 +59,9 @@ ActiveRecord::Schema.define(version: 20140131175830) do
     t.datetime "updated_at"
   end
 
+  create_table "testing", force: true do |t|
+  end
+
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "email"
@@ -58,6 +71,6 @@ ActiveRecord::Schema.define(version: 20140131175830) do
     t.string   "remember_token"
   end
 
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 
 end
